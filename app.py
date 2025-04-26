@@ -1,8 +1,19 @@
 from fastapi import FastAPI
 from gemini import generate_manim_code
 import subprocess
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 app = FastAPI()
+executor = ThreadPoolExecutor()
+
+
+def run_manim_code(code: str):
+    try:
+        exec(code)
+
+    except Exception as e:
+        print(f"Error while running generated code: {e}")
 
 
 @app.get("/")
@@ -11,14 +22,11 @@ def home():
 
 
 @app.get("/code/{topic}")
-async def get_code(topic: str):
+async def generate_and_run_code(topic: str):
+
     code = generate_manim_code(topic)
 
-    filename = f"{topic}_manim.py"
-    with open(filename, "w") as f:
-        f.write(code)
+    loop = asyncio.get_event_loop()
+    loop.run_in_executor(executor, run_manim_code, code)
 
-    subprocess.Popen(["python", filename],
-                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-    return {"status": "Code Generated and executed.", "file": filename}
+    return {"status": "Code Generated and executed in background."}
