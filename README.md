@@ -1,7 +1,6 @@
-# AI Powered Learning Assistant
+# AI Powered Learning Assistant 
 
 (Not just an API wrapper that generates vague text)
----
 
 ## Checklist
 
