@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from gemini import generate_manim_code
+import subprocess
 
 app = FastAPI()
 
@@ -10,5 +11,14 @@ def home():
 
 
 @app.get("/code/{topic}")
-def get_code(topic: str):
-    return generate_manim_code(topic)
+async def get_code(topic: str):
+    code = generate_manim_code(topic)
+
+    filename = f"{topic}_manim.py"
+    with open(filename, "w") as f:
+        f.write(code)
+
+    subprocess.Popen(["python", filename],
+                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    return {"status": "Code Generated and executed.", "file": filename}
