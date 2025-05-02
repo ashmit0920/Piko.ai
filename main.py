@@ -30,7 +30,7 @@ def run_manim(file_path: str, class_name: str):
         )
 
         stdout, stderr = process.communicate()
-        print("STDOUT:\n", stdout)
+        # print("STDOUT:\n", stdout)
         print("STDERR:\n", stderr)
 
     except Exception as e:
