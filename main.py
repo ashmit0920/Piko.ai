@@ -22,11 +22,17 @@ def find_scene_class_name(code: str) -> str:
 def run_manim(file_path: str, class_name: str):
     # run the manim CLI cmd to generate video
     try:
-        subprocess.Popen(
+        process = subprocess.Popen(
             ["manim", "-pqh", file_path, class_name],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
+            text=True
         )
+
+        stdout, stderr = process.communicate()
+        print("STDOUT:\n", stdout)
+        print("STDERR:\n", stderr)
+
     except Exception as e:
         print(f"Error running Manim: {e}")
 
@@ -51,7 +57,7 @@ async def generate_and_run_code(topic: str):
         return {"status": "Failed", "reason": "No Manim Scene class found."}
 
     # Run Manim asynchronously
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
     loop.run_in_executor(executor, run_manim, file_path, class_name)
 
     return {"status": "Manim animation is rendering in background.", "file": file_path, "scene": class_name}
