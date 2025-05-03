@@ -1,0 +1,11 @@
+google
+python-dotenv
+markdownify
+beautifulsoup4
+fastapi
+asyncio
+re
+subprocess
+os
+manim
+requests

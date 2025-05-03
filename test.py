@@ -1,6 +1,3 @@
-import time
-import re
-import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import subprocess
 
@@ -10,7 +7,6 @@ classname = "strings_in_programming"
 
 
 def run_manim(file_path: str, class_name: str):
-    # run the manim CLI cmd to generate video
     try:
         process = subprocess.Popen(
             ["manim", "-pqh", file_path, class_name],
