@@ -3,44 +3,39 @@ from manim import *
 class rotational_motion(Scene):
     def construct(self):
         circle = Circle(radius=2, color=BLUE)
-        dot = Dot(color=RED)
-        dot.move_to(circle.point_from_proportion(0))
-
         self.play(Create(circle))
+        
+        dot = Dot(circle.point_from_proportion(0), color=RED)
         self.play(Create(dot))
-
-        number_of_rotations = 2
-        time_for_complete_rotation = 3
-
+        
+        line = Line(circle.get_center(), dot.get_center(), color=GREEN)
+        self.play(Create(line))
+        
+        def update_dot(mob, alpha):
+            mob.move_to(circle.point_from_proportion(alpha % 1))
+            return mob
+        
+        def update_line(mob):
+            mob.become(Line(circle.get_center(), dot.get_center(), color=GREEN))
+            return mob
+        
         self.play(
-            Rotate(
-                dot,
-                angle=number_of_rotations * 2 * PI,
-                about_point=circle.get_center(),
-                run_time=number_of_rotations * time_for_complete_rotation,
-                rate_func=linear
-            )
+            UpdateFromAlphaFunc(dot, update_dot),
+            UpdateFromFunc(line, update_line),
+            rate_func=linear,
+            run_time=5,
         )
-
-        angular_velocity = number_of_rotations * 2 * PI / (number_of_rotations * time_for_complete_rotation)
-        angular_velocity_text = MathTex(r"\omega = " + str(round(angular_velocity,2)) + " \ rad/s")
-        angular_velocity_text.to_edge(UL)
-
-        self.play(Write(angular_velocity_text))
+        
+        angular_velocity = ValueTracker(0)
+        angular_velocity_text = Text("Angular Velocity: 0 rad/s").to_edge(UP)
+        self.add(angular_velocity_text)
+        
+        def update_angular_velocity_text(mob):
+            mob.become(Text("Angular Velocity: " + str(round(angular_velocity.get_value(), 2)) + " rad/s").to_edge(UP))
+            return mob
+        
+        self.play(angular_velocity.animate.set_value(1), UpdateFromFunc(angular_velocity_text, update_angular_velocity_text), run_time=3)
+        
         self.wait(2)
-        self.play(FadeOut(angular_velocity_text))
-
-        arrow = Arrow(start=circle.get_center(), end=circle.get_center() + RIGHT * 2, color=GREEN)
-        arrow_label = MathTex(r"r").next_to(arrow, UP)
-
-        self.play(Create(arrow), Create(arrow_label))
-
-        tangential_velocity = angular_velocity * 2
-        tangential_velocity_text = MathTex(r"v = r\omega = " + str(round(tangential_velocity, 2)) + " \ m/s")
-        tangential_velocity_text.to_edge(UL)
-
-        self.play(Write(tangential_velocity_text))
-        self.wait(2)
-
-        self.play(FadeOut(circle, dot, arrow, arrow_label, tangential_velocity_text))
-        self.wait(1)
+        
+        self.play(FadeOut(circle, dot, line, angular_velocity_text))

@@ -1,0 +1,8 @@
+# This file is used internally by FFMPEG.
+file 'file:D:/Learning assisant/media/videos/rotational_motion/1080p60/partial_movie_files/rotational_motion/3529212410_4101763949_223132457.mp4'
+file 'file:D:/Learning assisant/media/videos/rotational_motion/1080p60/partial_movie_files/rotational_motion/3040924799_1061236056_3425753932.mp4'
+file 'file:D:/Learning assisant/media/videos/rotational_motion/1080p60/partial_movie_files/rotational_motion/3040924799_1765489074_1455767623.mp4'
+file 'file:D:/Learning assisant/media/videos/rotational_motion/1080p60/partial_movie_files/rotational_motion/3040924799_3556258255_2384807087.mp4'
+file 'file:D:/Learning assisant/media/videos/rotational_motion/1080p60/partial_movie_files/rotational_motion/3040924799_3623731180_10679909.mp4'
+file 'file:D:/Learning assisant/media/videos/rotational_motion/1080p60/partial_movie_files/rotational_motion/3040924799_4247107814_370954722.mp4'
+file 'file:D:/Learning assisant/media/videos/rotational_motion/1080p60/partial_movie_files/rotational_motion/3040924799_2275277964_1870885898.mp4'
