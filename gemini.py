@@ -1,10 +1,9 @@
 from google import genai
 import os
 from dotenv import load_dotenv
-import requests
-from bs4 import BeautifulSoup
 from markdownify import markdownify as md
-import textwrap
+from langchain_community.vectorstores import FAISS
+from langchain.embeddings import HuggingFaceEmbeddings
 
 load_dotenv()
 
@@ -12,23 +11,36 @@ GEMINI_KEY = os.getenv("gemini_key")
 
 client = genai.Client(api_key=GEMINI_KEY)
 
+embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+vectorstore = FAISS.load_local(
+    "manim_index", embedding_model, index_name="index", allow_dangerous_deserialization=True)
 
-def fetch_manim_doc(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    main_content = soup.find("div", {"role": "main"})  # Sphinx layout
-    text_md = md(str(main_content))
-    # limit tokens
-    return textwrap.shorten(text_md, width=15000, placeholder="...")
+# Convert a user topic into a more helpful query for searching Manim documentation.
 
 
-# Example Manim Tex documentation URL
-doc_url = "https://docs.manim.community/en/stable/reference/manim.mobject.geometry.arc.Circle.html"
-doc_text = fetch_manim_doc(doc_url)
+def generate_search_query(topic: str) -> str:
+    base_phrases = [
+        f"How to animate {topic} using Manim",
+        f"How to visually represent {topic} in Manim",
+        f"Manim example for {topic}",
+        f"Which Manim objects or animations are useful for {topic}",
+        f"How to create a scene about {topic} in Manim"
+    ]
+    return " | ".join(base_phrases)
 
 
 def generate_manim_code(topic):
+    search_query = generate_search_query(topic)
+    docs = vectorstore.similarity_search(
+        search_query, k=3)  # get top 3 relevant chunks
+    context_text = "\n".join([doc.page_content for doc in docs])
+
     prompt = f"""Manim is a python library used to generate mathematical/scientific/programming animations. You need to write python code using python's Manim library, to generate beautiful and aesthetic animations about a given topic.
+    
+    Below is relevant reference information from the official Manim documentation:
+    ---
+    {context_text}
+    ---
     
     STRICTLY follow the guidelines below while writing the manim code -
     
@@ -40,10 +52,12 @@ def generate_manim_code(topic):
         
     The topic for which you need to write manim code is - {topic}
     
-    Use the documentation for Circle objects below for accuracy (if required) -
-    {doc_text}"""
+    """
 
     res = client.models.generate_content(
         model="gemini-2.0-flash", contents=prompt)
 
     return res.text
+
+
+print(generate_manim_code("rotational motion"))
