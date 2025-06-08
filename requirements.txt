@@ -9,3 +9,4 @@ subprocess
 os
 manim
 requests
+numpy==1.26.2
