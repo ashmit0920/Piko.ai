@@ -4,8 +4,9 @@ markdownify
 beautifulsoup4
 fastapi
 asyncio
-re
-subprocess
+regex
+subprocess.run
+futures
 os
 manim
 requests
