@@ -11,3 +11,5 @@ os
 manim
 requests
 numpy==1.26.2
+langchain
+langchain_community
