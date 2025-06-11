@@ -26,7 +26,7 @@ const Steps = () => {
       {/* Decorative animated blobs */}
       {/* <BackgroundAnimation /> */}
 
-      <section className="relative z-10 text-center max-w-2xl py-16">
+      <section id='steps' className="relative z-10 text-center max-w-2xl py-16">
         <motion.h2
           className="text-2xl font-semibold text-gray-300 mb-6"
           initial={{ y: -30, opacity: 0 }}

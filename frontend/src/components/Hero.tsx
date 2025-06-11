@@ -4,6 +4,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 // Example dynamic import for a decorative background animation (e.g., Lottie)
 // const BackgroundAnimation = dynamic(
@@ -47,8 +48,8 @@ const Hero = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <Button size="lg">
-            Get Started
+          <Button size="lg"className='bg-slate-900' asChild>
+            <a href="#steps">Get Started</a>
           </Button>
         </motion.div>
       </section>
