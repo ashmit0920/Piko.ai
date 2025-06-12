@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Card,
   CardAction,
@@ -14,18 +14,9 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-// Example dynamic import for a decorative background animation (e.g., Lottie)
-// const BackgroundAnimation = dynamic(
-//   () => import('@/components/animations/BlobAnimation'),
-//   { ssr: false }
-// );
-
 const Steps = () => {
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-gray-900 to-black px-6">
-      {/* Decorative animated blobs */}
-      {/* <BackgroundAnimation /> */}
-
       <section id='steps' className="relative z-10 text-center max-w-2xl py-16">
         <motion.h2
           className="text-2xl font-semibold text-gray-300 mb-6"
@@ -45,8 +36,13 @@ const Steps = () => {
           Transform your topics into stunning, explanatory animations. Enter a topic, and instantly receive tailored explanatory video.
         </motion.p>
         
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
         <div className="flex justify-center items-center min-h-xl min-w-xl">
-          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg max-w-xs mx-2">
+          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg w-xs mx-2">
             <CardHeader>
               <CardTitle>One Click is all you need</CardTitle>
               <CardDescription>~ Dua Lipa (probably)</CardDescription>
@@ -56,26 +52,32 @@ const Steps = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg max-w-xs mx-2">
+          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg w-xs mx-2">
             <CardHeader>
-              <CardTitle>One Click is all you need</CardTitle>
-              <CardDescription>~ Dua Lipa (probably)</CardDescription>
+              <CardTitle>Give Piko a few minutes</CardTitle>
+              <CardDescription>Let it do its magic</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Just enter the topic you want to learn and hit "Create".</p>
+              <p>Piko will write code to generate and compile an animation just for you.</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg max-w-xs mx-2">
+          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg w-xs mx-2">
             <CardHeader>
-              <CardTitle>One Click is all you need</CardTitle>
-              <CardDescription>~ Dua Lipa (probably)</CardDescription>
+              <CardTitle>Voila! All done</CardTitle>
+              <CardDescription>Ready Study Go</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Just enter the topic you want to learn and hit "Create".</p>
+              <p>Within 2-3 minutes, you would have an explanatory video ready!</p>
             </CardContent>
           </Card>
         </div>
+        </motion.div>
+
+        <Textarea placeholder='Enter any topic...' className='border-slate-700 mt-15 text-white'/>
+        <Button size="lg" className='bg-slate-900 mt-5' asChild>
+            <a href="#steps">Create</a>
+        </Button>
 
       </section>
     </main>
