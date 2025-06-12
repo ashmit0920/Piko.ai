@@ -3,7 +3,7 @@ import atom from "@/assets/atom.json"
 
 const AtomAnimation = () => {
   return (
-    <div className="absolute top-0 left-0 w-full h-full z-0 opacity-20">
+    <div className="absolute top-3 left-50% w-3xs h-3xs z-0 opacity-70">
       <Lottie animationData={atom} loop={true} />
     </div>
   );
