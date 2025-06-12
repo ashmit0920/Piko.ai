@@ -1,31 +1,31 @@
-from concurrent.futures import ThreadPoolExecutor
-import subprocess
+from google import genai
+import os
+from dotenv import load_dotenv
 
-executor = ThreadPoolExecutor()
+load_dotenv()
 
-classname = "strings_in_programming"
-
-
-def run_manim(file_path: str, class_name: str):
-    try:
-        process = subprocess.Popen(
-            ["manim", "-pqh", file_path, class_name],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-
-        stdout, stderr = process.communicate()
-        print("STDOUT:\n", stdout)
-        print("STDERR:\n", stderr)
-
-    except Exception as e:
-        print(f"Error running Manim: {e}")
+GEMINI_KEY = os.getenv("gemini_key")
+client = genai.Client(api_key=GEMINI_KEY)
 
 
-# loop = asyncio.new_event_loop()
-# loop.run_in_executor(executor, run_manim,
-#                      "generated/strings_in_programming.py", classname)
+def generate_explanation(topic):
+    prompt = f"""You are an intelligent and friendly learning assistant designed to help users understand academic topics in a clear and approachable way.
 
-future = executor.submit(
-    run_manim, "generated/test_string.py", "test_string")
+    Given a topic, generate a brief and accurate explanation suitable for students or self-learners.
+
+    Follow these strict guidelines:
+    1. Keep the explanation concise — **no more than 5-7 sentences**.
+    2. Use simple, **conversational language** while maintaining technical correctness.
+    3. Start with a clear definition or high-level overview of the topic.
+    4. Include **one key insight or real-world example** if appropriate.
+    5. **Avoid excessive jargon, equations, or code** — focus on clarity.
+    6. Do **not greet the user**, ask questions, or include motivational phrases.
+    7. Your output should be **only the explanation**, with **no headings, bullet points, or extra formatting**.
+
+    Topic: {topic}
+    """
+
+    res = client.models.generate_content(
+        model="gemini-2.0-flash", contents=prompt)
+
+    return res.text
