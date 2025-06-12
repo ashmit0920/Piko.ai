@@ -4,19 +4,13 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
-
-// Example dynamic import for a decorative background animation (e.g., Lottie)
-// const BackgroundAnimation = dynamic(
-//   () => import('@/components/animations/BlobAnimation'),
-//   { ssr: false }
-// );
+import AtomAnimation from './ui/atom';
 
 const Hero = () => {
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-gray-900 to-black px-6">
       {/* Decorative animated blobs */}
-      {/* <BackgroundAnimation /> */}
+      <AtomAnimation />
 
       <section className="relative z-10 text-center max-w-2xl py-16">
         <motion.h1
