@@ -4,9 +4,18 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 import re
 import asyncio
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 executor = ThreadPoolExecutor()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # or ["*"] for all
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def find_scene_class_name(code: str) -> str:

@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,6 +16,26 @@ import {
 } from "@/components/ui/card"
 
 const Steps = () => {
+  const [topic, setTopic] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleCreate = async () => {
+    if (!topic.trim()) return;
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(`http://localhost:8000/`);
+      const data = await response.json(); // adjust if your backend returns plain text   code/${encodeURIComponent(topic)}
+      console.log("Generated Code:", data);
+      // Handle display, saving, or scrolling here
+    } catch (error) {
+      console.error("API call failed:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-gray-900 to-black px-6">
       <section id='steps' className="relative z-10 text-center max-w-2xl py-16">
@@ -74,9 +95,14 @@ const Steps = () => {
         </div>
         </motion.div>
 
-        <Textarea placeholder='Enter any topic...' className='border-slate-700 mt-15 text-white'/>
-        <Button size="lg" className='bg-slate-900 mt-5' asChild>
-            <a href="#steps">Create</a>
+        <Textarea 
+          placeholder='Enter any topic...' 
+          className='border-slate-700 mt-15 text-white' 
+          value={topic} 
+          onChange={(e) => setTopic(e.target.value)}
+        />
+        <Button size="lg" className='bg-slate-900 mt-5' onClick={handleCreate} disabled={loading}>
+            {loading ? "Creating..." : "Create"}
         </Button>
 
       </section>
