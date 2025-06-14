@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from gemini import generate_manim_code
+from gemini import generate_manim_code, generate_explanation
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 import re
@@ -54,19 +54,20 @@ def home():
 @app.get("/code/{topic}")
 async def generate_and_run_code(topic: str):
 
-    code = generate_manim_code(topic)
+    # code = generate_manim_code(topic)
 
-    file_path = f"generated/{topic}.py"
-    with open(file_path, "w") as f:
-        f.write(code)
+    # file_path = f"generated/{topic}.py"
+    # with open(file_path, "w") as f:
+    #     f.write(code)
 
-    # Find the class name
-    class_name = find_scene_class_name(code)
-    if not class_name:
-        return {"status": "Failed", "reason": "No Manim Scene class found."}
+    # # Find the class name
+    # class_name = find_scene_class_name(code)
+    # if not class_name:
+    #     return {"status": "Failed", "reason": "No Manim Scene class found."}
 
-    # Run Manim asynchronously
-    loop = asyncio.new_event_loop()
-    loop.run_in_executor(executor, run_manim, file_path, class_name)
+    # # Run Manim asynchronously
+    # loop = asyncio.new_event_loop()
+    # loop.run_in_executor(executor, run_manim, file_path, class_name)
 
-    return {"status": "Manim animation is rendering in background.", "file": file_path, "scene": class_name}
+    explanation = generate_explanation(topic)
+    return {"status": "Manim animation is rendering in background.", "explanation": explanation}

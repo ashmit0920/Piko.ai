@@ -18,6 +18,7 @@ import {
 const Steps = () => {
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
+  const [explanation, setExplanation] = useState("");
 
   const handleCreate = async () => {
     if (!topic.trim()) return;
@@ -28,9 +29,10 @@ const Steps = () => {
       const response = await fetch(`http://localhost:8000/code/${encodeURIComponent(topic)}`);
       const data = await response.json(); // adjust if your backend returns plain text
       console.log("Generated Code:", data);
-      // Handle display, saving, or scrolling here
+      setExplanation(data.explanation)
     } catch (error) {
       console.error("API call failed:", error);
+      setExplanation("Oops! An error occured while generating explanation.")
     } finally {
       setLoading(false);
     }
@@ -105,6 +107,18 @@ const Steps = () => {
             {loading ? "Creating..." : "Create"}
         </Button>
 
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+        {explanation && (
+        <div className="mt-8 p-4 rounded-md text-white border border-slate-700">
+          <h3 className="text-lg font-semibold mb-2">Explanation:</h3>
+          <p className="text-slate-300 whitespace-pre-line text-justify">{explanation}</p>
+        </div>
+        )}
+        </motion.div>
       </section>
     </main>
   );
