@@ -16,28 +16,6 @@ import {
 } from "@/components/ui/card"
 
 const Steps = () => {
-  const [topic, setTopic] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [explanation, setExplanation] = useState("");
-
-  const handleCreate = async () => {
-    if (!topic.trim()) return;
-
-    setLoading(true);
-
-    try {
-      const response = await fetch(`http://localhost:8000/code/${encodeURIComponent(topic)}`);
-      const data = await response.json(); // adjust if your backend returns plain text
-      console.log("Generated Code:", data);
-      setExplanation(data.explanation)
-    } catch (error) {
-      console.error("API call failed:", error);
-      setExplanation("Oops! An error occured while generating explanation.")
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-gray-900 to-black px-6">
       <section id='steps' className="relative z-10 text-center max-w-2xl py-16">
@@ -97,27 +75,14 @@ const Steps = () => {
         </div>
         </motion.div>
 
-        <Textarea 
-          placeholder='Enter any topic...' 
-          className='border-slate-700 mt-15 text-white' 
-          value={topic} 
-          onChange={(e) => setTopic(e.target.value)}
-        />
-        <Button size="lg" className='bg-slate-900 mt-5' onClick={handleCreate} disabled={loading}>
-            {loading ? "Creating..." : "Create"}
-        </Button>
-
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-        {explanation && (
-        <div className="mt-8 p-4 rounded-md text-white border border-slate-700">
-          <h3 className="text-lg font-semibold mb-2">Explanation:</h3>
-          <p className="text-slate-300 whitespace-pre-line text-justify">{explanation}</p>
-        </div>
-        )}
+          <Button size="lg" className='bg-slate-900 mt-8' asChild>
+              <a href="#create">Ask Piko</a>
+          </Button>
         </motion.div>
       </section>
     </main>

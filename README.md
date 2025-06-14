@@ -9,5 +9,5 @@
 - [x] Background ThreadPoolExecutor - manim cli
 - [x] Video constraints - define minimum video length (too short rn)
 - [x] Prompt constraints - add more text in animations, generate text explanation separately (for frontend)
-- [ ] Store videos in cloud - files api
-- [ ] Frontend
+- [ ] TTS for text explanations
+- [ ] Animations in cloud - files api
