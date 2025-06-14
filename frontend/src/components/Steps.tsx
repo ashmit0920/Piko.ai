@@ -25,8 +25,8 @@ const Steps = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/`);
-      const data = await response.json(); // adjust if your backend returns plain text   code/${encodeURIComponent(topic)}
+      const response = await fetch(`http://localhost:8000/code/${encodeURIComponent(topic)}`);
+      const data = await response.json(); // adjust if your backend returns plain text
       console.log("Generated Code:", data);
       // Handle display, saving, or scrolling here
     } catch (error) {

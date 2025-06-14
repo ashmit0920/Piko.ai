@@ -48,7 +48,7 @@ def generate_manim_code(topic):
     2. The output should be purely text, do not use code block formats (like ```python```). 
     3. Do not write any comments in the code and use proper indentation to make sure it works correctly. 
     4. In the code, keep the required Class name exactly the same as topic name.
-    5. Do not use classes like Tex() or MathTex() which requires the user to download external dependencies (Latex in this example).
+    5. Do not use classes like Tex(), MathTex(), Integer(), etc. which requires the user to download external dependencies (Latex in this example).
     6. REMEMBER THAT YOU ARE NOT RESTRICTED to the API reference provided above, IT IS JUST ADDITIONAL CONTEXT TO AVOID SYNTAX ERRORS. YOU ARE FREE TO WRITE MANIM CODE OTHER THAN THE REFERENCES PROVIDED ABOVE.
 
     The topic for which you need to write manim code is - {topic}. Ideate on how a good and well-explained animation should look like, along with text and annotations in the animation - and write code for it accordingly.
