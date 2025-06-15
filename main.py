@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 import re
 import asyncio
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 executor = ThreadPoolExecutor()
@@ -71,3 +72,5 @@ async def generate_and_run_code(topic: str):
 
     explanation = generate_explanation(topic)
     return {"status": "Manim animation is rendering in background.", "explanation": explanation}
+
+app.mount("/videos", StaticFiles(directory="media/videos"), name="videos")

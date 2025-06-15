@@ -15,7 +15,7 @@ const Steps = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Your Friendly Neighbourhood Learning Assistant
+          Your Friendly Neighbourhood <span className='text-sky-300'>Learning Assistant</span>
         </motion.h2>
 
         <motion.p
@@ -26,31 +26,31 @@ const Steps = () => {
         >
           Transform your topics into stunning, explanatory animations. Enter a topic, and instantly receive tailored explanatory video.
         </motion.p>
-        
+
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-        <div className="flex justify-center items-center min-h-xl min-w-xl">
-          <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
-            <p className='font-bold'>One click is all you need</p>
-            <p className='text-neutral-500 text-sm mb-5'>~ Dua Lipa (probably)</p>
-            <p>Just enter the topic you want to learn and hit "Create".</p>
-          </SpotlightCard>
-          
-          <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
-            <p className='font-bold'>Give Piko a few minutes</p>
-            <p className='text-neutral-500 text-sm mb-5'>To do its magic</p>
-            <p>Piko will write code to generate an animation just for you.</p>
-          </SpotlightCard>
-          
-          <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
-            <p className='font-bold'>Voila! All done</p>
-            <p className='text-neutral-500 text-sm mb-5'>Ready Study Go</p>
-            <p>Within 2-3 minutes, you would have an explanatory video ready!</p>
-          </SpotlightCard>
-        </div>
+          <div className="flex justify-center items-center min-h-xl min-w-xl">
+            <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
+              <p className='font-bold'>One click is all you need</p>
+              <p className='text-neutral-500 text-sm mb-5'>~ Dua Lipa (probably)</p>
+              <p>Just enter the topic you want to learn and hit "Create".</p>
+            </SpotlightCard>
+
+            <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
+              <p className='font-bold'>Give Piko a few minutes</p>
+              <p className='text-neutral-500 text-sm mb-5'>To do its magic</p>
+              <p>Piko will write code to generate an animation just for you.</p>
+            </SpotlightCard>
+
+            <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
+              <p className='font-bold'>Voila! All done</p>
+              <p className='text-neutral-500 text-sm mb-5'>Ready Study Go</p>
+              <p>Within 2-3 minutes, you would have an explanatory video ready!</p>
+            </SpotlightCard>
+          </div>
         </motion.div>
 
         <motion.div
@@ -59,7 +59,7 @@ const Steps = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <Button size="lg" className='bg-slate-900 mt-8' asChild>
-              <a href="#create">Ask Piko</a>
+            <a href="#create">Ask Piko</a>
           </Button>
         </motion.div>
       </section>
