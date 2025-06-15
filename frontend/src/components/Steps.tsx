@@ -1,10 +1,9 @@
 "use client";
 
 import React from 'react';
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Textarea } from '@/components/ui/textarea';
+import SpotlightCard from './ui/SpotlightCard/SpotlightCard';
 import {
   Card,
   CardAction,
@@ -43,35 +42,23 @@ const Steps = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
         <div className="flex justify-center items-center min-h-xl min-w-xl">
-          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg w-xs mx-2">
-            <CardHeader>
-              <CardTitle>One Click is all you need</CardTitle>
-              <CardDescription>~ Dua Lipa (probably)</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Just enter the topic you want to learn and hit "Create".</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg w-xs mx-2">
-            <CardHeader>
-              <CardTitle>Give Piko a few minutes</CardTitle>
-              <CardDescription>Let it do its magic</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Piko will write code to generate and compile an animation just for you.</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-slate-900 text-white border-slate-700 shadow-lg w-xs mx-2">
-            <CardHeader>
-              <CardTitle>Voila! All done</CardTitle>
-              <CardDescription>Ready Study Go</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Within 2-3 minutes, you would have an explanatory video ready!</p>
-            </CardContent>
-          </Card>
+          <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
+            <p className='font-bold'>One click is all you need</p>
+            <p className='text-neutral-500 text-sm mb-5'>~ Dua Lipa (probably)</p>
+            <p>Just enter the topic you want to learn and hit "Create".</p>
+          </SpotlightCard>
+          
+          <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
+            <p className='font-bold'>Give Piko a few minutes</p>
+            <p className='text-neutral-500 text-sm mb-5'>To do its magic</p>
+            <p>Piko will write code to generate an animation just for you.</p>
+          </SpotlightCard>
+          
+          <SpotlightCard className='text-white bg-slate-900 border-slate-700 shadow-lg w-lg h-lg mx-2' spotlightColor="rgba(255, 255, 255, 0.25)">
+            <p className='font-bold'>Voila! All done</p>
+            <p className='text-neutral-500 text-sm mb-5'>Ready Study Go</p>
+            <p>Within 2-3 minutes, you would have an explanatory video ready!</p>
+          </SpotlightCard>
         </div>
         </motion.div>
 
