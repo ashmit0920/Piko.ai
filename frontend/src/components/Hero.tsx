@@ -3,7 +3,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import AtomAnimation from './ui/atom';
 
 const Hero = () => {
@@ -11,7 +10,7 @@ const Hero = () => {
     <main className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-gray-900 to-black px-6">
       {/* Decorative animated blobs */}
       <AtomAnimation />
-
+      
       <section className="relative z-10 text-center max-w-2xl py-16">
         <motion.h1
           className="text-6xl font-extrabold bg-gradient-to-r from-cyan-300 to-blue-800 bg-clip-text text-transparent mb-4"
