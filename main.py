@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from gemini import generate_manim_code, generate_explanation
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
@@ -6,6 +6,7 @@ import re
 import asyncio
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+import os
 
 app = FastAPI()
 executor = ThreadPoolExecutor()

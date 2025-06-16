@@ -31,7 +31,7 @@ const Create = () => {
 
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-gray-900 to-black px-6">
-      <section id='create' className="relative z-10 flex flex-col items-center justify-center px-4">
+      <section id='create' className="relative z-10 flex flex-col items-center justify-center px-4 w-full">
         {/* Top Info Paragraph */}
         <motion.p
           className="text-lg text-gray-500 mb-8 text-center max-w-xl"
@@ -75,15 +75,19 @@ const Create = () => {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="mt-10 max-w-2xl px-6"
+            className="mt-10 px-6 w-full"
           >
-            <div className="p-6 rounded-md text-white border border-slate-700 bg-slate-900 shadow-lg">
-              <h3 className="text-xl font-semibold mb-3 text-sky-300">Explanation:</h3>
-              <p className="text-slate-300 whitespace-pre-line text-justify leading-relaxed">
-                {explanation}
-              </p>
+            <div className="text-white flex flex-col lg:flex-row gap-8 w-full max-w-6xl mx-auto">
+              {/* Text Explanation */}
+              <div className="w-full lg:w-1/2 p-6 rounded-md border border-slate-700 bg-slate-900 shadow-lg">
+                <h3 className="text-xl font-semibold mb-3 text-sky-300">Explanation:</h3>
+                <p className="text-slate-300 whitespace-pre-line text-justify leading-relaxed">
+                  {explanation}
+                </p>
+              </div>
 
-              <div className="mt-6">
+              {/* Video */}
+              <div className="w-full lg:w-1/2 p-6 rounded-md border border-slate-700 bg-slate-900 shadow-lg">
                 <h4 className="text-lg font-medium text-green-400 mb-2">Generated Animation:</h4>
                 <video
                   className="rounded-md w-full border border-slate-600"
@@ -91,7 +95,7 @@ const Create = () => {
                   preload="metadata"
                 >
                   <source
-                    src={`http://localhost:8000/videos/${encodeURIComponent(topic)}/480p15.mp4`}
+                    src={`http://localhost:8000/videos/${topic}/1080p60/linked_lists.mp4`}
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.
@@ -100,22 +104,6 @@ const Create = () => {
             </div>
           </motion.div>
         )}
-
-        {/* Testing the video area */}
-        <div className="mt-6">
-          <h4 className="text-lg font-medium text-sky-300 mb-2">Generated Animation:</h4>
-          <video
-            className="rounded-md w-1/2 border border-slate-600"
-            controls
-            preload="metadata"
-          >
-            <source
-              src={`http://localhost:8000/videos/linked_lists/1080p60/linked_lists.mp4`}
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
 
       </section>
     </main>
