@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Textarea } from '@/components/ui/textarea';
+import GeneratedVideo from './GeneratedVideo';
 
 const Create = () => {
   const [topic, setTopic] = useState("");
@@ -89,17 +90,9 @@ const Create = () => {
               {/* Video */}
               <div className="w-full lg:w-1/2 p-6 rounded-md border border-slate-700 bg-slate-900 shadow-lg">
                 <h4 className="text-lg font-medium text-green-400 mb-2">Generated Animation:</h4>
-                <video
-                  className="rounded-md w-full border border-slate-600"
-                  controls
-                  preload="metadata"
-                >
-                  <source
-                    src={`http://localhost:8000/videos/${topic}/1080p60/linked_lists.mp4`}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
+
+                <GeneratedVideo topic={topic} resolution="1080p60" />
+
               </div>
             </div>
           </motion.div>

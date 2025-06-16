@@ -75,3 +75,17 @@ async def generate_and_run_code(topic: str):
     return {"status": "Manim animation is rendering in background.", "explanation": explanation}
 
 app.mount("/videos", StaticFiles(directory="media/videos"), name="videos")
+
+
+@app.get("/videos/{topic}/{resolution}/file")
+def get_video_path(topic: str, resolution: str):
+    dir_path = os.path.join("media", "videos", topic, resolution)
+    if not os.path.isdir(dir_path):
+        raise HTTPException(404, "Topic Directory not found")
+
+    files = [f for f in os.listdir(dir_path) if f.endswith(".mp4")]
+
+    if not files:
+        raise HTTPException(404, "No video found")
+    # return the first (and only) mp4 filename
+    return {"filename": files[0]}
