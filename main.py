@@ -7,6 +7,7 @@ import asyncio
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
+import logging
 
 app = FastAPI()
 executor = ThreadPoolExecutor()
@@ -74,18 +75,23 @@ async def generate_and_run_code(topic: str):
     explanation = generate_explanation(topic)
     return {"status": "Manim animation is rendering in background.", "explanation": explanation}
 
-app.mount("/videos", StaticFiles(directory="media/videos"), name="videos")
+app.mount("/static/videos", StaticFiles(directory="media/videos"), name="videos")
 
 
 @app.get("/videos/{topic}/{resolution}/file")
-def get_video_path(topic: str, resolution: str):
+def get_generated_video(topic: str, resolution: str):
     dir_path = os.path.join("media", "videos", topic, resolution)
+    print("Checking folder:", dir_path)
+
     if not os.path.isdir(dir_path):
-        raise HTTPException(404, "Topic Directory not found")
+        print("Folder does not exist")
+        raise HTTPException(404, "Topic or resolution not found")
 
     files = [f for f in os.listdir(dir_path) if f.endswith(".mp4")]
+    print("Found files:", files)
 
     if not files:
+        print("No MP4s found yet")
         raise HTTPException(404, "No video found")
-    # return the first (and only) mp4 filename
+
     return {"filename": files[0]}

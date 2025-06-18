@@ -1,31 +1,37 @@
-from google import genai
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-GEMINI_KEY = os.getenv("gemini_key")
-client = genai.Client(api_key=GEMINI_KEY)
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 
-def generate_explanation(topic):
-    prompt = f"""You are an intelligent and friendly learning assistant designed to help users understand academic topics in a clear and approachable way.
+# dir_path = os.path.join("media", "videos", "binary search", "1080p60")
+# print("Checking folder:", dir_path)
 
-    Given a topic, generate a brief and accurate explanation suitable for students or self-learners.
+# if not os.path.isdir(dir_path):
+#     print("Folder does not exist")
 
-    Follow these strict guidelines:
-    1. Keep the explanation concise — **no more than 5-7 sentences**.
-    2. Use simple, **conversational language** while maintaining technical correctness.
-    3. Start with a clear definition or high-level overview of the topic.
-    4. Include **one key insight or real-world example** if appropriate.
-    5. **Avoid excessive jargon, equations, or code** — focus on clarity.
-    6. Do **not greet the user**, ask questions, or include motivational phrases.
-    7. Your output should be **only the explanation**, with **no headings, bullet points, or extra formatting**.
+# files = [f for f in os.listdir(dir_path) if f.endswith(".mp4")]
+# print("Found files:", files)
 
-    Topic: {topic}
-    """
+# if not files:
+#     print("No MP4s found yet")
 
-    res = client.models.generate_content(
-        model="gemini-2.0-flash", contents=prompt)
+app = FastAPI()
 
-    return res.text
+app.mount("/videos", StaticFiles(directory="media/videos"), name="videos")
+
+
+@app.get("/videos/{topic}/{resolution}/file")
+def get_generated_video(topic: str, resolution: str):
+    dir_path = os.path.join("media", "videos", topic, resolution)
+    print("Checking folder:", dir_path)
+
+    if not os.path.isdir(dir_path):
+        print("Folder does not exist")
+
+    files = [f for f in os.listdir(dir_path) if f.endswith(".mp4")]
+    print("Found files:", files)
+
+    if not files:
+        print("No MP4s found yet")
+
+    return {"filename": files[0]}

@@ -46,7 +46,7 @@ export default function GeneratedVideo({ topic, resolution = "1080p60" }: Props)
             preload="metadata"
         >
             <source
-                src={`http://localhost:8000/videos/${encodeURIComponent(topic)}/${resolution}/${videoFile}`}
+                src={`http://localhost:8000/static/videos/${encodeURIComponent(topic)}/${resolution}/${videoFile}`}
                 type="video/mp4"
             />
             Your browser does not support the video tag.
