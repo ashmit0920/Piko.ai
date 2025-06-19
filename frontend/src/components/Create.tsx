@@ -95,6 +95,17 @@ const Create = () => {
 
               </div>
             </div>
+
+            <div className='flex flex-col items-center justify-center'>
+              <div className="flex flex-col items-center justify-center mt-6 mx-8 w-1/4">
+                <h4 className="text-lg font-medium text-yellow-400 mb-2">Audio Explanation:</h4>
+                <audio controls className="w-full">
+                  <source src={`http://localhost:8000/audio/explanation.wav`} type="audio/wav" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
+
           </motion.div>
         )}
 

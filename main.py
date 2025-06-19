@@ -7,7 +7,7 @@ import asyncio
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
-import logging
+from text_to_speech import generate_audio
 
 app = FastAPI()
 executor = ThreadPoolExecutor()
@@ -73,9 +73,12 @@ async def generate_and_run_code(topic: str):
     loop.run_in_executor(executor, run_manim, file_path, class_name)
 
     explanation = generate_explanation(topic)
+    generate_audio(explanation)
+
     return {"status": "Manim animation is rendering in background.", "explanation": explanation}
 
 app.mount("/static/videos", StaticFiles(directory="media/videos"), name="videos")
+app.mount("/audio", StaticFiles(directory="."), name="audio")
 
 
 @app.get("/videos/{topic}/{resolution}/file")

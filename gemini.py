@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from markdownify import markdownify as md
 from langchain_community.vectorstores import FAISS
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 load_dotenv()
 
@@ -11,9 +11,9 @@ GEMINI_KEY = os.getenv("gemini_key")
 
 client = genai.Client(api_key=GEMINI_KEY)
 
-embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-vectorstore = FAISS.load_local(
-    "manim_index", embedding_model, index_name="index", allow_dangerous_deserialization=True)
+# embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+# vectorstore = FAISS.load_local(
+#     "manim_index", embedding_model, index_name="index", allow_dangerous_deserialization=True)
 
 # Convert a user topic into a more helpful query for searching Manim documentation.
 
@@ -37,17 +37,12 @@ def generate_search_query(topic: str) -> str:
 
 
 def generate_manim_code(topic):
-    search_query = generate_search_query(topic)
-    docs = vectorstore.similarity_search(
-        search_query, k=5)  # get top 5 relevant chunks
-    context_text = "\n".join([doc.page_content for doc in docs])
+    # search_query = generate_search_query(topic)
+    # docs = vectorstore.similarity_search(
+    #     search_query, k=5)  # get top 5 relevant chunks
+    # context_text = "\n".join([doc.page_content for doc in docs])
 
     prompt = f"""Manim is a python library used to generate mathematical/scientific/programming animations. You need to write python code using python's Manim library, to generate beautiful and aesthetic animations about a given topic.
-
-    Below is some relevant reference information from the official Manim documentation, it might not be totally correct or accurate or dont depend entirely on this reference:
-    ---
-    {context_text}
-    ---
 
     STRICTLY follow the guidelines below while writing the manim code -
 
@@ -56,10 +51,9 @@ def generate_manim_code(topic):
     3. Do not write any comments in the code and use proper indentation to make sure it works correctly.
     4. In the code, keep the required Class name exactly the same as topic name.
     5. Do not use classes like Tex(), MathTex(), Integer(), etc. which requires the user to download external dependencies (Latex in this example).
-    6. REMEMBER THAT YOU ARE NOT RESTRICTED to the API reference provided above, IT IS JUST ADDITIONAL CONTEXT TO AVOID SYNTAX ERRORS. YOU ARE FREE TO WRITE MANIM CODE OTHER THAN THE REFERENCES PROVIDED ABOVE.
 
     The topic for which you need to write manim code is - {topic}. Ideate on how a good and well-explained animation should look like, along with text and annotations in the animation - and write code for it accordingly.
-    The animation should atleast be around 15-20 seconds, there's no upper limit write as much code as needed. Make sure that the animation does not go outside the screen and the visuals are not distorted or messed up.
+    The animation should atleast be around 15-20 seconds, there's no upper limit write as much code as needed.
 
     """
 
@@ -90,3 +84,27 @@ def generate_explanation(topic):
         model="gemini-2.0-flash", contents=prompt)
 
     return res.text
+
+
+# Prompt with similarity search -
+
+    # prompt = f"""Manim is a python library used to generate mathematical/scientific/programming animations. You need to write python code using python's Manim library, to generate beautiful and aesthetic animations about a given topic.
+
+    # Below is some relevant reference information from the official Manim documentation, it might not be totally correct or accurate or dont depend entirely on this reference:
+    # ---
+    # {context_text}
+    # ---
+
+    # STRICTLY follow the guidelines below while writing the manim code -
+
+    # 1. Your response should strictly ONLY CONTAIN THE PYTHON CODE and nothing else, no intro or outro lines or any descriptions.
+    # 2. The output should be purely text, do not use code block formats (like ```python```).
+    # 3. Do not write any comments in the code and use proper indentation to make sure it works correctly.
+    # 4. In the code, keep the required Class name exactly the same as topic name.
+    # 5. Do not use classes like Tex(), MathTex(), Integer(), etc. which requires the user to download external dependencies (Latex in this example).
+    # 6. REMEMBER THAT YOU ARE NOT RESTRICTED to the API reference provided above, IT IS JUST ADDITIONAL CONTEXT TO AVOID SYNTAX ERRORS. YOU ARE FREE TO WRITE MANIM CODE OTHER THAN THE REFERENCES PROVIDED ABOVE.
+
+    # The topic for which you need to write manim code is - {topic}. Ideate on how a good and well-explained animation should look like, along with text and annotations in the animation - and write code for it accordingly.
+    # The animation should atleast be around 15-20 seconds, there's no upper limit write as much code as needed.
+
+    # """
