@@ -1,16 +1,13 @@
-<h1 align="center">✨ Piko.ai </h1>
-<h3 align="center">Your Friendly Neighbourhood Learning Assistant 🎥</h3>
+<h1 align="center">Piko.ai</h1>
+<h3 align="center">Your Friendly Neighbourhood Learning Assistant</h3>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Manim-AI-blueviolet" />
   <img src="https://img.shields.io/badge/Built%20with-FastAPI-blue" />
   <img src="https://img.shields.io/badge/Frontend-Next.js%20%2B%20Tailwind-0ea5e9" />
   <img src="https://img.shields.io/badge/AI-Powered%20by%20Gemini-ffca28" />
 </p>
 
-> 🎯 **Piko.ai** is an AI-powered learning assistant that turns any topic into beautiful **Manim-based animations** and concise explanations — all from a simple prompt.
-
----
+**Piko.ai** is an AI-powered learning assistant that turns any topic into beautiful **Manim-based animations** and concise explanations — all from a simple prompt.
 
 ## 🚀 Features
 
@@ -23,13 +20,12 @@
 - 📝 **Topic Explanation with LLM**  
   Along with the animation, a concise textual explanation is generated to help users understand the topic better.
 
-- 🎧 **Audio Narration (Optional)**  
+- 🎧 **Audio Narration**  
   Support for accompanying `.wav` audio narration for enhanced understanding.
 
 - 🌐 **Modern Frontend Experience**  
   Built with **Next.js**, **Tailwind CSS**, **Framer Motion**, and **ShadCN** for smooth UX, animations, and mobile responsiveness.
 
----
 
 ## 🖼️ Preview
 
@@ -37,8 +33,7 @@
 |--------------|---------------------------|
 | ![Landing Page](./assets/landing.png) | ![Generated Output](./assets/output.png) |
 
----
-
+For a video demo, click [here](./assets/Demo.mp4)
 ## 🛠️ Tech Stack
 
 ### 🔹 Frontend
@@ -81,7 +76,7 @@ pip install -r requirements.txt
 2. Run FastAPI server
 
 ```bash
-uvicorn main:app --reload
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 3. Setup Frontend
