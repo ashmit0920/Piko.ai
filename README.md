@@ -33,7 +33,8 @@
 |--------------|---------------------------|
 | ![Landing Page](./assets/landing.png) | ![Generated Output](./assets/output.png) |
 
-For a video demo, click [here](./assets/Demo.mp4)
+For a demo video, click [here](./assets/Demo.mp4).
+
 ## 🛠️ Tech Stack
 
 ### 🔹 Frontend
@@ -46,21 +47,24 @@ For a video demo, click [here](./assets/Demo.mp4)
 - `FastAPI` for API endpoints and routing
 - `Google Gemini API` for code + explanation generation
 - `Manim` CLI for compiling Python animations
-- `StaticFiles` for serving media
+- `FAISS` for creating a vector index of documentation
 
 ---
 
 ## 🧪 How It Works
 
+<details> <summary>✅ Click to see working Mermaid block</summary>
+
 ```mermaid
 graph TD;
-    User[User enters a topic] -->|POST /code/{topic}| FastAPI
-    FastAPI -->|Prompt sent to Gemini| GeminiAPI
-    GeminiAPI -->|Returns Python Manim code| FastAPI
-    FastAPI -->|Saves & compiles with Manim| MP4[.mp4 Video]
-    FastAPI -->|Returns explanation & video| Frontend
-    Frontend -->|Plays video + shows explanation| User
+    User["User enters a topic"] -->|"POST /code/{topic}"| FastAPI
+    FastAPI -->|"Prompt sent to Gemini"| GeminiAPI
+    GeminiAPI -->|"Returns Manim code"| FastAPI
+    FastAPI -->|"Compile with Manim"| MP4[".mp4 Video"]
+    FastAPI -->|"Return explanation + video"| Frontend
+    Frontend -->|"Display to user"| User
 ```
+</details>
 
 ## Running Locally
 
