@@ -59,7 +59,7 @@ Mermaid Block:
 graph TD;
     User["User enters a topic"] -->|"POST /code/{topic}"| FastAPI
     FastAPI -->|"Generate search query from topic"| QueryGen
-    QueryGen -->|"Perform FAISS similarity search"| VectorDB[Vector Store (FAISS)]
+    QueryGen -->|"Perform FAISS similarity search"| VectorDB["Vector Store (FAISS)"]
     VectorDB -->|"Top docs as context"| FastAPI
     FastAPI -->|"Prompt Gemini with context + topic"| GeminiAPI
     GeminiAPI -->|"Returns Manim code + explanation"| FastAPI
