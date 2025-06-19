@@ -58,11 +58,15 @@ For a demo video, click [here](./assets/Demo.mp4).
 ```mermaid
 graph TD;
     User["User enters a topic"] -->|"POST /code/{topic}"| FastAPI
-    FastAPI -->|"Prompt sent to Gemini"| GeminiAPI
-    GeminiAPI -->|"Returns Manim code"| FastAPI
-    FastAPI -->|"Compile with Manim"| MP4[".mp4 Video"]
-    FastAPI -->|"Return explanation + video"| Frontend
-    Frontend -->|"Display to user"| User
+    FastAPI -->|"Generate search query from topic"| QueryGen
+    QueryGen -->|"Perform FAISS similarity search"| VectorDB[Vector Store (FAISS)]
+    VectorDB -->|"Top docs as context"| FastAPI
+    FastAPI -->|"Prompt Gemini with context + topic"| GeminiAPI
+    GeminiAPI -->|"Returns Manim code + explanation"| FastAPI
+    FastAPI -->|"Compile with Manim CLI"| MP4[".mp4 Video"]
+    FastAPI -->|"Return video + explanation"| Frontend
+    Frontend -->|"Display animation and text"| User
+
 ```
 </details>
 
