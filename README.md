@@ -12,19 +12,19 @@
 ## 🚀 Features
 
 - 🧠 **AI-Powered Animation Generation**  
-  Enter a topic (e.g. “binary trees” or “rotational motion”), and instantly generate Manim code using Google's Gemini LLM.
+  > Enter a topic (e.g. “binary trees” or “rotational motion”), and instantly generate Manim code using Google's Gemini LLM.
 
 - 🎬 **Automatic Video Compilation**  
-  The generated Python code is saved, compiled using Manim CLI, and the output `.mp4` video is served automatically to the frontend.
+  > The generated Python code is saved, compiled using Manim CLI, and the output `.mp4` video is served automatically to the frontend.
 
 - 📝 **Topic Explanation with LLM**  
-  Along with the animation, a concise textual explanation is generated to help users understand the topic better.
+  > Along with the animation, a concise textual explanation is generated to help users understand the topic better.
 
 - 🎧 **Audio Narration**  
-  Support for accompanying `.wav` audio narration for enhanced understanding.
+  > Support for accompanying `.wav` audio narration for enhanced understanding.
 
 - 🌐 **Modern Frontend Experience**  
-  Built with **Next.js**, **Tailwind CSS**, **Framer Motion**, and **ShadCN** for smooth UX, animations, and mobile responsiveness.
+  > Built with **Next.js**, **Tailwind CSS**, **Framer Motion**, and **ShadCN** for smooth UX, animations, and mobile responsiveness.
 
 
 ## 🖼️ Preview
@@ -53,7 +53,7 @@ For a demo video, click [here](./assets/Demo.mp4).
 
 ## 🧪 How It Works
 
-<details> <summary>✅ Click to see working Mermaid block</summary>
+Mermaid Block:
 
 ```mermaid
 graph TD;
@@ -68,7 +68,6 @@ graph TD;
     Frontend -->|"Display animation and text"| User
 
 ```
-</details>
 
 ## Running Locally
 
@@ -100,5 +99,5 @@ npm run dev
 Create a .env file in the root folder:
 
 ```
-GEMINI_API_KEY=your_google_gemini_api_key
+GEMINI_API_KEY = your_google_gemini_api_key
 ```
