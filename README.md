@@ -9,6 +9,8 @@
 
 **Piko.ai** is an AI-powered learning assistant that turns any topic into beautiful **Manim-based animations** and concise explanations — all from a simple prompt.
 
+![Landing Page](./assets/landing.png)
+
 ## 🚀 Features
 
 - 🧠 **AI-Powered Animation Generation**  
